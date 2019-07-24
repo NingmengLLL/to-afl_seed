@@ -1,5 +1,5 @@
 #include "klee_to_afl.h"
 
-int main(int argc, char const* const* argv) {
+int main() {
 	klee_to_afl(); 
 }
