@@ -1,14 +1,17 @@
 #include "klee_to_afl.h"
 
+std::string myinput;
+std::string myoutput;
+
 void generate_afl_seed_dir(const std::string& path, std::unordered_set<std::string>& cache){
-	auto dir_path = fs::path(path.c_str());  
+	auto dir_path = fs::path(path.c_str());
 	fs::create_directory(path);
 	std::ostringstream filename;
 	for(auto& test:cache){
 		std::ofstream file;
 		filename << path << "/" << rand() << ".txt";
 		file.open(filename.str());
-		file << test << std::endl; 
+		file << test << std::endl;
 		filename.str(std::string());
 	}
 }
@@ -61,7 +64,7 @@ void klee_to_afl(){
 		} else if (ext == ".ll"){
 
 		} else if (ext == ".stats"){
-		
+
 		} else if (ext == ".istats"){
 
 		} else if (ext == ""){
@@ -73,4 +76,9 @@ void klee_to_afl(){
 		}
 	}
 	generate_afl_seed_dir(myoutput,cache);
+}
+
+void get_path(const std::string& path1, const std::string& path2){
+	myinput = path1;
+	myoutput = path2;
 }
